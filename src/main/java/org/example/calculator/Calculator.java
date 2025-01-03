@@ -29,15 +29,15 @@ public class Calculator {
         return answer;
     }
 
-    public ArrayList<Double> getCalArr() {
+    public ArrayList<Double> getCalArr() {     // private인 배열을 리턴해주는 메서드
         return this.calArr;
     }
 
-    public void setCalArr(double input) {
+    public void setCalArr(double input) {       // private인 배열에 값을 넣어주는 메서드
         this.calArr.add(input);
     }
 
-    public void delCalArr() {
+    public void delCalArr() {       // private인 배열의 첫번째 인덱스 값을 삭제해주는 메서드
         this.calArr.remove(0);
     }
 }
