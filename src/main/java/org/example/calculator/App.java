@@ -65,7 +65,7 @@ public class App {
                             case "-" -> ArithmeticCalculator.OperatorType.subtractOperation;
                             case "*" -> ArithmeticCalculator.OperatorType.multiplyOperation;
                             case "/" -> ArithmeticCalculator.OperatorType.divideOperation;
-                            default -> throw new IllegalStateException(operator);
+                            default -> throw new BadInputException();
                         };
 
                         ariCal.setOperator(op);
