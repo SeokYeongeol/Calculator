@@ -67,7 +67,10 @@ public class ArithmeticCalculator<T extends Number> {
         },
         divideOperation("/") {
             @Override
-            public double apply(double stNum, double ndNum) { return stNum / ndNum; }
+            public double apply(double stNum, double ndNum) {
+                if(ndNum != 0) return stNum / ndNum;
+                else return 0;
+            }
         };
 
         private final String oper;
