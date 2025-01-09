@@ -4,7 +4,7 @@ import java.util.*;
 public class ArithmeticCalculator<T extends Number> {
     private T firstNumber;
     private T secondNumber;
-    private final List<T> ariArr = new ArrayList<>();
+    private final List<T> calculateArr = new ArrayList<>();
 
     private OperatorType operator;
 
@@ -16,8 +16,8 @@ public class ArithmeticCalculator<T extends Number> {
         return secondNumber;
     }
 
-    public List<T> getAriArr() {
-        return ariArr;
+    public List<T> getCalculateArr() {
+        return calculateArr;
     }
 
     public void setFirstNumber(T firstNumber) {
@@ -48,8 +48,8 @@ public class ArithmeticCalculator<T extends Number> {
         setOperator(op);
     }
 
-    public void deleteAriArr(int index) {
-        this.ariArr.remove(index);
+    public void deleteCalculateArr(int index) {
+        this.calculateArr.remove(index);
     }
 
     public enum OperatorType {
