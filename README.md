@@ -16,4 +16,5 @@
 
 ## 🏹 Trouble Shooting
 **제네릭 와일드 카드 사용**
+
 트러블슈팅 링크 : <https://velog.io/@cheoni5417/Trouble-Shooting>
