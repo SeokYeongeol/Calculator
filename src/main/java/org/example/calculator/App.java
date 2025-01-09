@@ -5,6 +5,7 @@ import java.util.regex.Pattern;
 
 public class App {
     private static final String OPERATION_REG = "[+\\-*/]";
+    private static final String DOUBLE_NUMBER_REG = "^([0-9]*[.])?[0-9]+$";
     private static final String NUMBER_REG = "^[0-9]*$";
 
     public static void main(String[] args) {
@@ -25,7 +26,7 @@ public class App {
                 if(val1.equals("exit")) break;
 
                 try {       // exit와 숫자가 아닌 다른 값을 입력했을 때 처음으로 돌아가게 하는 예외 처리문
-                    if(!Pattern.matches(NUMBER_REG, val1)) {
+                    if(!Pattern.matches(DOUBLE_NUMBER_REG, val1)) {
                         throw new BadInputException();
                     }
                     else ariCal.setFirstNumber(Double.parseDouble(val1));       // ArithmeticCalculator 클래스의 firstNumber에 값을 넣음
@@ -40,7 +41,7 @@ public class App {
                 if(val2.equals("exit")) break;
 
                 try {       // exit와 숫자가 아닌 다른 값을 입력했을 때 처음으로 돌아가게 하는 예외 처리문
-                    if(!Pattern.matches(NUMBER_REG, val2)) {
+                    if(!Pattern.matches(DOUBLE_NUMBER_REG, val2)) {
                         throw new BadInputException();
                     }
                     else ariCal.setSecondNumber(Double.parseDouble(val2));      // ArithmeticCalculator 클래스의 firstNumber에 값을 넣음
@@ -74,8 +75,30 @@ public class App {
                     System.out.println("삭제할 컬렉션이 없습니다..\n");
                 }
                 else {
-                    System.out.println("첫 번째 값이 삭제되었습니다! 삭제된 값 : " + ariCal.getAriArr().get(0) + "\n");
-                    ariCal.getAriArr().remove(0);
+                    System.out.println("몇 번째 데이터를 삭제하시겠습니까? (0부터 시작)");
+                    System.out.print("현재 데이터 : " + ariCal.getAriArr().stream().toList() + "\n");
+                    System.out.print("입력 : ");
+                    String delVal = sc.next();
+
+                    try {
+                        if(!Pattern.matches(NUMBER_REG, delVal)) {
+                            throw new BadInputException();
+                        }
+                        else {
+                            int index = Integer.parseInt(delVal);
+
+                            if(ariCal.getAriArr().size()-1 < index) {
+                                throw new BadInputException();
+                            }
+                            else {
+                                System.out.println("삭제 된 데이터 : " + ariCal.getAriArr().get(index));
+                                ariCal.deleteAriArr(index);
+                                System.out.println();
+                            }
+                        }
+                    } catch(BadInputException e) {
+                        System.out.println(e.getMessage());
+                    }
                 }
             }
 
@@ -108,7 +131,7 @@ public class App {
                         if(value.equals("exit")) break;
 
                         try {
-                            if(!Pattern.matches(NUMBER_REG, value)) {
+                            if(!Pattern.matches(DOUBLE_NUMBER_REG, value)) {
                                 throw new BadInputException();
                             }
                             else {      // 배열에서 입력 값보다 큰 값의 리스트들을 출력하는 Stream Lambda

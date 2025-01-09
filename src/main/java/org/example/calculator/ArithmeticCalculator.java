@@ -48,6 +48,9 @@ public class ArithmeticCalculator<T extends Number> {
         setOperator(op);
     }
 
+    public void deleteAriArr(int index) {
+        this.ariArr.remove(index);
+    }
 
     public enum OperatorType {
         addOperation("+") {
