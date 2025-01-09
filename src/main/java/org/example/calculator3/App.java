@@ -44,7 +44,6 @@ public class App {
                     if(!Pattern.matches(DOUBLE_NUMBER_REG, val2)) {
                         throw new BadInputException();
                     }
-                    else if(Double.parseDouble(val2) == 0) throw new BadInputException();
                     calculator.setSecondNumber(Double.parseDouble(val2));      // ArithmeticCalculator 클래스의 firstNumber에 값을 넣음
                 } catch (BadInputException e) {
                     System.out.println(e.getMessage());
