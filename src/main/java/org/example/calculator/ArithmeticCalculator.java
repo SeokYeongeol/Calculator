@@ -28,12 +28,24 @@ public class ArithmeticCalculator<T extends Number> {
         this.secondNumber = secondNumber;
     }
 
-    public void setOperator(OperatorType operator) {
+    private void setOperator(OperatorType operator) {
         this.operator = operator;
     }
 
     public double calculate() {
         return this.operator.apply(this.getFirstNumber().doubleValue(), this.getSecondNumber().doubleValue());
+    }
+
+    public void basicOperation(String operation) {
+        OperatorType op = switch(operation) {
+            case "+" -> OperatorType.addOperation;
+            case "-" -> OperatorType.subtractOperation;
+            case "*" -> OperatorType.multiplyOperation;
+            case "/" -> OperatorType.divideOperation;
+            default -> throw new IllegalStateException();
+        };
+
+        setOperator(op);
     }
 
 

@@ -9,7 +9,6 @@ public class App {
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        Calculator cal = new Calculator();
         ArithmeticCalculator<Double> ariCal = new ArithmeticCalculator<>();
 
         while(true) {
@@ -60,15 +59,7 @@ public class App {
                         throw new BadInputException();
                     }
                     else {
-                        ArithmeticCalculator.OperatorType op = switch(operator) {
-                            case "+" -> ArithmeticCalculator.OperatorType.addOperation;
-                            case "-" -> ArithmeticCalculator.OperatorType.subtractOperation;
-                            case "*" -> ArithmeticCalculator.OperatorType.multiplyOperation;
-                            case "/" -> ArithmeticCalculator.OperatorType.divideOperation;
-                            default -> throw new BadInputException();
-                        };
-
-                        ariCal.setOperator(op);
+                        ariCal.basicOperation(operator);
                         double answer = ariCal.calculate();
                         ariCal.getAriArr().add(answer);     // 배열에 계산한 값 추가
                         System.out.println("계산 결과 : " + answer + "\n");
