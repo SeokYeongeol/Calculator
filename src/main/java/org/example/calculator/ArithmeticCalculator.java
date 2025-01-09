@@ -4,7 +4,7 @@ import java.util.*;
 public class ArithmeticCalculator<T extends Number> {
     private T firstNumber;
     private T secondNumber;
-    private final ArrayList<T> ariArr = new ArrayList<>();
+    private final List<T> ariArr = new ArrayList<>();
 
     private OperatorType operator;
 
@@ -16,7 +16,7 @@ public class ArithmeticCalculator<T extends Number> {
         return secondNumber;
     }
 
-    public ArrayList<T> getAriArr() {
+    public List<T> getAriArr() {
         return ariArr;
     }
 
