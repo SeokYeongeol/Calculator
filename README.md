@@ -10,4 +10,4 @@
 <br>
 
 ## 🔍 Tech Stack
-<img src="https://github.com/yewon-Noh/readme-template/raw/main/skills/Java.png?raw=true" width=80>
+<img src="https://github.com/yewon-Noh/readme-template/raw/main/skills/Java.png?raw=true" width=120>
