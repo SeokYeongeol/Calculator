@@ -73,7 +73,7 @@ public class App {
             else if (choice.equals("2")) {   // 계산 데이터 삭제
                 if (calculator.getCalculateArr().isEmpty()) {          // 계산 데이터가 없을 때 처음으로 돌아가는 예외 처리문
                     System.out.println("삭제할 컬렉션이 없습니다..\n");
-                    // continue;
+                    continue;
                 }
                 System.out.println("몇 번째 데이터를 삭제하시겠습니까? (0부터 시작)");
                 System.out.print("현재 데이터 : " + calculator.getCalculateArr().stream().toList() + "\n");
