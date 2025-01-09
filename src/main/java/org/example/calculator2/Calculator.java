@@ -1,8 +1,8 @@
-package org.example.calculator;
+package org.example.calculator2;
 import java.util.*;
 
 public class Calculator {
-    private ArrayList<Double> calArr = new ArrayList<>();
+    private List<Double> calArr = new ArrayList<>();
 
     public double calculate(String firstNum, String secondNum, String operator) {
         double answer = 0;
@@ -29,7 +29,7 @@ public class Calculator {
         return answer;
     }
 
-    public ArrayList<Double> getCalArr() {     // private인 배열을 리턴해주는 메서드
+    public List<Double> getCalArr() {     // private인 배열을 리턴해주는 메서드
         return this.calArr;
     }
 

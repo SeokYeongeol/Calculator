@@ -1,4 +1,4 @@
-package org.example.calculator;
+package org.example.calculator3;
 
 import java.util.Scanner;
 import java.util.regex.Pattern;
@@ -10,7 +10,7 @@ public class App {
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        ArithmeticCalculator<Double> ariCal = new ArithmeticCalculator<>();
+        ArithmeticCalculator<Double> calculator = new ArithmeticCalculator<>();
 
         while(true) {
             System.out.println("계산기에서 나가시려면 언제든지 exit을 입력해주세요!");
@@ -29,7 +29,7 @@ public class App {
                     if(!Pattern.matches(DOUBLE_NUMBER_REG, val1)) {
                         throw new BadInputException();
                     }
-                    else ariCal.setFirstNumber(Double.parseDouble(val1));       // ArithmeticCalculator 클래스의 firstNumber에 값을 넣음
+                    calculator.setFirstNumber(Double.parseDouble(val1));       // ArithmeticCalculator 클래스의 firstNumber에 값을 넣음
                 } catch (BadInputException e) {
                     System.out.println(e.getMessage());
                     continue;
@@ -44,7 +44,7 @@ public class App {
                     if(!Pattern.matches(DOUBLE_NUMBER_REG, val2)) {
                         throw new BadInputException();
                     }
-                    else ariCal.setSecondNumber(Double.parseDouble(val2));      // ArithmeticCalculator 클래스의 firstNumber에 값을 넣음
+                    calculator.setSecondNumber(Double.parseDouble(val2));      // ArithmeticCalculator 클래스의 firstNumber에 값을 넣음
                 } catch (BadInputException e) {
                     System.out.println(e.getMessage());
                     continue;
@@ -52,6 +52,7 @@ public class App {
 
                 System.out.print("사칙연산 기호를 입력해주세요 (+, -, *, /) : ");
                 String operator = sc.next();
+
                 if(operator.equals("exit")) break;
 
                 // 연산자 입력 오류 예외처리
@@ -59,51 +60,45 @@ public class App {
                     if(!Pattern.matches(OPERATION_REG, operator)) {
                         throw new BadInputException();
                     }
-                    else {
-                        ariCal.basicOperation(operator);
-                        double answer = ariCal.calculate();
-                        ariCal.getAriArr().add(answer);     // 배열에 계산한 값 추가
-                        System.out.println("계산 결과 : " + answer + "\n");
-                    }
+                    calculator.basicOperation(operator);
+                    double answer = calculator.calculate();
+                    calculator.getAriArr().add(answer);     // 배열에 계산한 값 추가
+                    System.out.println("계산 결과 : " + answer + "\n");
+
                 } catch (BadInputException e) {
                     System.out.println(e.getMessage());
                 }
             }
 
             else if(choice.equals("2")) {   // 계산 데이터 삭제
-                if(ariCal.getAriArr().isEmpty()) {          // 계산 데이터가 없을 때 처음으로 돌아가는 예외 처리문
+                if(calculator.getAriArr().isEmpty()) {          // 계산 데이터가 없을 때 처음으로 돌아가는 예외 처리문
                     System.out.println("삭제할 컬렉션이 없습니다..\n");
+                    // continue;
                 }
-                else {
-                    System.out.println("몇 번째 데이터를 삭제하시겠습니까? (0부터 시작)");
-                    System.out.print("현재 데이터 : " + ariCal.getAriArr().stream().toList() + "\n");
-                    System.out.print("입력 : ");
-                    String delVal = sc.next();
 
-                    try {
-                        if(!Pattern.matches(NUMBER_REG, delVal)) {
-                            throw new BadInputException();
-                        }
-                        else {
-                            int index = Integer.parseInt(delVal);
+                System.out.println("몇 번째 데이터를 삭제하시겠습니까? (0부터 시작)");
+                System.out.print("현재 데이터 : " + calculator.getAriArr().stream().toList() + "\n");
+                System.out.print("입력 : ");
+                String delVal = sc.next();
 
-                            if(ariCal.getAriArr().size()-1 < index) {
-                                throw new BadInputException();
-                            }
-                            else {
-                                System.out.println("삭제 된 데이터 : " + ariCal.getAriArr().get(index));
-                                ariCal.deleteAriArr(index);
-                                System.out.println();
-                            }
-                        }
-                    } catch(BadInputException e) {
-                        System.out.println(e.getMessage());
+                if(delVal.equals("exit")) break;
+
+                try {
+                    if(!Pattern.matches(NUMBER_REG, delVal)) {
+                        throw new BadInputException();
                     }
+                    int index = Integer.parseInt(delVal);
+
+                    if(calculator.getAriArr().size()-1 < index) {
+                        throw new BadInputException();
+                    }
+                    System.out.println("삭제 된 데이터 : " + calculator.getAriArr().get(index));
+                    calculator.deleteAriArr(index);
+                    System.out.println();
+                } catch(BadInputException e) {
+                    System.out.println(e.getMessage());
                 }
-            }
-
-
-            else if(choice.equals("3")) {         // 계산 데이터 조회
+            } else if(choice.equals("3")) {         // 계산 데이터 조회
                 System.out.println("1. 모든 데이터 조회, 2. 해당 값보다 높은 데이터 조회");
                 System.out.print("입력 : ");
                 String choiNum = sc.next();         // 어떤 데이터를 조회할지 입력
@@ -111,37 +106,34 @@ public class App {
                 if(choiNum.equals("exit")) break;       // 계산기 나가기
 
                 else if(choiNum.equals("1")) {      // 현재 배열 데이터 모두 조회
-                    if(ariCal.getAriArr().isEmpty()) {          // 배열이 비어있을 때 처음으로 돌아가는 예외 처리문
+                    if(calculator.getAriArr().isEmpty()) {          // 배열이 비어있을 때 처음으로 돌아가는 예외 처리문
                         System.out.println("조회할 컬렉션이 없습니다. 처음으로 돌아갑니다.\n");
+                        continue;
                     }
-                    else {          // 배열에 값이 있을 때 출력
-                        System.out.print(ariCal.getAriArr().stream().toList());
-                        System.out.println("\n");
-                    }
-                }
+                    // 배열에 값이 있을 때 출력
+                    System.out.print(calculator.getAriArr().stream().toList());
+                    System.out.println("\n");
 
-                else if(choiNum.equals("2")) {      // 입력 값보다 높은 데이터 모두 조회
-                    if(ariCal.getAriArr().isEmpty()) {
+                } else if(choiNum.equals("2")) {      // 입력 값보다 높은 데이터 모두 조회
+                    if(calculator.getAriArr().isEmpty()) {
                         System.out.println("조회할 컬렉션이 없습니다. 처음으로 돌아갑니다.\n");
+                        continue;
                     }
-                    else {
-                        System.out.print("값 입력 : ");
-                        String value = sc.next();       // 해당 값보다 높은 값을 조회하기 위한 입력 변수
+                    System.out.print("값 입력 : ");
+                    String value = sc.next();       // 해당 값보다 높은 값을 조회하기 위한 입력 변수
 
-                        if(value.equals("exit")) break;
+                    if(value.equals("exit")) break;
 
-                        try {
-                            if(!Pattern.matches(DOUBLE_NUMBER_REG, value)) {
-                                throw new BadInputException();
-                            }
-                            else {      // 배열에서 입력 값보다 큰 값의 리스트들을 출력하는 Stream Lambda
-                                System.out.print(ariCal.getAriArr().stream().filter(arr -> arr > Double.parseDouble(value))
-                                        .toList());
-                                System.out.println("\n");
-                            }
-                        } catch(BadInputException e) {
-                            System.out.println(e.getMessage());
+                    try {
+                        if(!Pattern.matches(DOUBLE_NUMBER_REG, value)) {
+                            throw new BadInputException();
                         }
+                        // 배열에서 입력 값보다 큰 값의 리스트들을 출력하는 Stream Lambda
+                        System.out.print(calculator.getAriArr().stream().filter(arr -> arr > Double.parseDouble(value))
+                                .toList());
+                        System.out.println("\n");
+                    } catch(BadInputException e) {
+                        System.out.println(e.getMessage());
                     }
                 }
                 // exit와 숫자가 아닌 다른 값을 입력했을 때 처음으로 돌아가게 하는 예외 처리문

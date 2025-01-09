@@ -1,4 +1,4 @@
-package org.example.calculator;
+package org.example.calculator3;
 import java.util.*;
 
 public class ArithmeticCalculator<T extends Number> {
