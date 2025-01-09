@@ -11,3 +11,9 @@
 
 ## 🔍 Tech Stack
 <img src="https://github.com/yewon-Noh/readme-template/raw/main/skills/Java.png?raw=true" width=120>
+
+<br>
+
+## 🏹 Trouble Shooting
+**제네릭 와일드 카드 사용**
+트러블슈팅 링크 : <https://velog.io/@cheoni5417/Trouble-Shooting>
