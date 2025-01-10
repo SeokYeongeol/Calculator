@@ -131,10 +131,7 @@ public class App {
                         System.out.println(e.getMessage());
                     }
                 } else System.out.println("잘못된 값을 입력하셨습니다. 처음으로 돌아갑니다.\n"); // exit와 숫자가 아닌 다른 값을 입력했을 때 처음으로 돌아가게 하는 예외 처리문
-            }
-
-            else if (choice.equals("exit")) break;       // 계산기 나가기
-
+            } else if (choice.equals("exit")) break;       // 계산기 나가기
             else System.out.println("잘못된 값을 입력하셨습니다. 처음으로 돌아갑니다.\n");       // 잘못 입력시 처음으로 돌아가는 예외처리
         }
         System.out.println("계산기 종료...");
